@@ -1,3 +1,4 @@
+# Teacher Class
 require_relative 'person'
 
 class Teacher < Person
