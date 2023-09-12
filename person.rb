@@ -3,7 +3,7 @@ class Person
   attr_reader :id
   attr_accessor :name, :age
 
-  def initialize(id, name = "Unknown", age = 0)
+  def initialize(id, name = 'Unknown', age = 0)
     @id = id
     @name = name
     @age = age
