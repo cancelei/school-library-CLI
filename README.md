@@ -3,7 +3,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 \[A Ruby-Project\] ](#about-project)
+- [📖 \[School Library CLI\] ](#about-project)
   - [🛠 Built With ](#built-with)
     - [Tech Stack ](#tech-stack)
   - [Getting Started](#getting-started)
@@ -18,13 +18,21 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [Ruby-Project] <a name="about-project"></a>
+# 📖 [School Library CLI] <a name="about-project"></a>
 
-This is a Ruby based project.
+This is a **[Ruby-Project]** that simulates a School Library with the following features:
 
-**[Ruby-Project]** is a...
+- Add users > Student or Teacher
+- Add books
+- Borrow books
+- Return books
+- List all books
+- List all users
+- List all borrowed books
+- And More...
 
 ## 🛠 Built With <a name="built-with"></a>
+
 Ruby
 
 ### Tech Stack <a name="tech-stack"></a>
@@ -40,11 +48,12 @@ Ruby
 ## Getting Started
 
 ### Prerequisites
+
 In order to run this project, you must have installed and configured the following tools in your local environment:
+
 - PowerShell as Admin
 - Ubuntu
 - Ruby Configurations
-
 
 ### Setup
 
@@ -57,9 +66,11 @@ Example commands:
   cd my-folder
   git@github.com:cancelei/Morse-Code-in-Ruby.git
 ```
- 
+
 --->
+
 Before to run the program, verify that you have Ruby installed on your OS running the following command:
+
 <!--
 ```sh
    ruby -v
@@ -87,19 +98,6 @@ Run the following command inside the project folder:
 - GitHub: [@cancelei](https://github.com/cancelei)
 - LinkedIn: [Glauber Bannwart](https://www.linkedin.com/in/gbannwart/)
 
-<!-- 👤 **Joseph L Kausi**
-
-- GitHub: [@Grandi0z](https://github.com/Grandi0z)
-- Twitter: [@Joseph_LSK](https://twitter.com/Joseph_LSK)
-- LinkedIn: [Joseph L Kausi](https://www.linkedin.com/in/joskal/)
-
-👤 **Syeda Masuma Fatima**
-
-- GitHub: [@MasumaJaffery](https://github.com/MasumaJaffery)
-- Twitter: [@MasumaJaffery](https://twitter.com/MasumaJaffery)
-- LinkedIn: [Masuma Jaffery](https://www.linkedin.com/in/masuma-jaffery-797a29256/) -->
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
@@ -108,7 +106,7 @@ Run the following command inside the project folder:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page](https://github.com/cancelei/school-library-CLI/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -124,8 +122,7 @@ If you like this project, I would like to Thank You!
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-Special Thanks to the Microverse and Microanuts.
-
+Special Thanks to the Microverse Team and my Stand Up Team for the support and motivation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
