@@ -1,8 +1,3 @@
-# Turn your Person class to Nameable
-# Make sure that your Person class inherits from Nameable
-# Make sure that this class has a method correct_name implemented. It should simply return the name attribute.
-# Prepare base Decorator
-
 require_relative 'nameable'
 require_relative 'basedecorator'
 require_relative 'trimmerdecorator'
