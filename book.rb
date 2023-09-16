@@ -16,9 +16,3 @@ class Book
     Rental.new(date, self, person)
   end
 end
-
-# person = Person.new('Max')
-# book = Book.new('Harry Potter', 'J.K. Rowling')
-# person.add_book(book)
-# puts person.books[0].title
-# puts book.person.name

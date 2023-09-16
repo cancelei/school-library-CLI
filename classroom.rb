@@ -13,8 +13,3 @@ class Classroom
   end
 end
 
-# classroom = Classroom.new('Math')
-# student = Student.new('Max')
-# classroom.add_student(student)
-# puts classroom.students[0].name
-# puts student.classroom.label
