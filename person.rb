@@ -4,7 +4,7 @@ require_relative 'trimmerdecorator'
 require_relative 'capitalizedecorator'
 
 class Person < Nameable
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :books, :rentals
   attr_reader :id
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -13,6 +13,8 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    @books = []
+    @rentals = []
   end
 
   def can_use_services?
@@ -29,11 +31,14 @@ class Person < Nameable
   def of_age?
     @age >= 18
   end
-end
 
-person = Person.new(22, 'maximilianus')
-person.correct_name
-capitalized_person = CapitalizeDecorator.new(person)
-puts capitalized_person.correct_name
-capitalized_trimmed_person = TrimDecorator.new(capitalized_person)
-puts capitalized_trimmed_person.correct_name
+  def add_book(book)
+    @books << book
+    book.person = self
+  end
+
+  def add_rental(book, date)
+    # *The person itself should be sent as a parameter to create the new rental achieving the 'has-many' association
+    Rental.new(date, book, self)
+  end
+end

@@ -59,27 +59,26 @@ In order to run this project, you must have installed and configured the followi
 
 Clone this repository to your desired folder:
 
-<!--
 Example commands:
 
 ```sh
   cd my-folder
-  git@github.com:cancelei/Morse-Code-in-Ruby.git
+  git@github.com:cancelei/school-library-CLI.git
 ```
 
---->
+-
 
-Before to run the program, verify that you have Ruby installed on your OS running the following command:
+<!-- Before running the program, verify that you have Ruby installed on your OS running the following command: -->
 
 <!--
 ```sh
    ruby -v
 ```
 --->
-
+<!--
 ### Useage
 
-Run the following command inside the project folder:
+Run the following command inside the project folder: -->
 
 <!--
 ```sh
