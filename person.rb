@@ -4,7 +4,7 @@ require_relative 'trimmerdecorator'
 require_relative 'capitalizedecorator'
 
 class Person < Nameable
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :books
   attr_reader :id
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -13,6 +13,7 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    @books = []
   end
 
   def can_use_services?
@@ -28,6 +29,11 @@ class Person < Nameable
 
   def of_age?
     @age >= 18
+  end
+
+  def add_book(book)
+    @books << book
+    book.person = self
   end
 end
 
