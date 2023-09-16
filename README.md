@@ -75,10 +75,14 @@ Example commands:
    ruby -v
 ```
 --->
-<!--
+
 ### Useage
 
-Run the following command inside the project folder: -->
+Run the following command inside the project folder:
+
+```sh
+   ruby main.rb
+```
 
 <!--
 ```sh

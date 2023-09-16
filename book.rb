@@ -4,10 +4,10 @@ class Book
   # *Getters and Setters for @rentals should be present
   attr_accessor :title, :author, :rentals
 
-  def initialize(title, person)
+  def initialize(title, author)
     @title = title
-    @person = person
-    person.books << self
+    @author = author
+    @rentals = []
   end
 
   # *A method for adding rentals should be present. Link to the example in a previous lesson: https://github.com/microverseinc/curriculum-ruby/blob/main/oop/articles/oop_relationships_by_examples.md#many-to-many-relationship
