@@ -8,7 +8,7 @@ class Person < Nameable
   attr_reader :id
 
   def initialize(age, name = 'Unknown', parent_permission: true)
-    super()
+    super(name)
     @id = Random.rand(1..1000)
     @age = age
     @name = name
