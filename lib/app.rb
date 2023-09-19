@@ -6,9 +6,9 @@ require_relative 'teacher'
 require 'json'
 class App
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = read_data("books.json")
+    @people = read_data("people.json")
+    @rentals = read_data("rentals.json")
   end
 
   def list_all_books
@@ -23,7 +23,7 @@ class App
     if @people.empty?
       puts 'No people added.'
     else
-      @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}" }
+      @people.each { |person| puts "ID: #{person.id}, Name: #{@people}" }
     end
   end
 
@@ -119,6 +119,16 @@ class App
     end
   end
 
+  def object_to_hash(object)
+    hash ={}
+    object.instance_variables.each do |var|
+      name = var.to_s.delete("@") # take the name of variable without @
+      value = object.instance_variable_get(var)
+      hash[name] = value
+    end
+    hash
+  end
+
   def write_data
     data = {"books":@books, "rentals":@rentals, "people":@people}
     data.each do |key, arr|
@@ -127,7 +137,10 @@ class App
         file_name = name + '.json'
         json = JSON.generate(arr)
         File.open(file_name, 'w') do |f|
-          f.write(json)
+          arr.each do |elt|
+            temp = object_to_hash(elt)
+            f.puts(JSON.generate(temp))
+          end
         end
         puts "The array #{name} has been written to #{file_name}"
       else 
@@ -135,6 +148,28 @@ class App
       end 
     end
   end
+  
+
+  require 'json'
+
+  def read_data(file_name)
+    if File.exist?(file_name)
+      File.open(file_name, 'r') do |file|
+        arr = []
+        file.each_line do |line|
+          line.chomp!
+          obeject = Object.const_get(line[/[A-Z]\w*/]).json_create(line)
+          arr.push(object_id)
+        end
+        arr
+      end
+    else
+      puts "The file #{file_name} does not exist."
+      [] # return en empty array
+    end
+  end
+  
+
 
   def check
     puts File.exist?('books.json') # should return true

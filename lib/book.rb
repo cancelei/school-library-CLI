@@ -15,4 +15,21 @@ class Book
     # *the book itself should be sent as a parameter to create the new rental achieving the 'has-many' association.
     Rental.new(date, self, person)
   end
+  
+  def self.json_create(string)
+    # Use a regular expression to extract the attributes and values from the string
+    /<Book:(\d+) title:(.*), author:(.*), rentals:(.*)>/ =~ string
+
+    # Create a new instance of the class with the extracted values
+    book = new($2, $3)
+
+    # Parse the rentals array from the string and create rental objects
+    rentals = JSON.parse($4)
+    rentals.each do |rental|
+      book.add_rental(Person.json_create(rental["person"]), rental["date"])
+    end
+
+    # Return the book object
+    book
+  end
 end
