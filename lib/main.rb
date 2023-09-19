@@ -31,8 +31,7 @@ def main
       id = gets.chomp.to_i
       app.list_rentals_for_person(id)
     when '7'
-      puts 'Goodbye!'
-      break
+      abort('Goodbye!')
     else
       puts 'Invalid option. Please, try again.'
     end
