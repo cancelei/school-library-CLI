@@ -51,6 +51,7 @@ class App
     raise 'Name cannot be empty.' if name.empty?
 
     print 'Has parent permission? [Y/N]: '
+    parent_permission_input = gets.chomp.downcase
     raise 'Invalid input. Choose Y or N.' unless %w[y n].include?(parent_permission_input)
 
     parent_permission = parent_permission_input == 'y'
@@ -58,36 +59,47 @@ class App
     student = Student.new(age, name, parent_permission: parent_permission)
     @people << student
     puts 'Student created successfully!'
-  rescue StandardError
+  rescue StandardError => e
     puts "Error: #{e.message}"
     retry
   end
 
   def create_teacher
     print 'Age: '
-    age = gets.chomp.to_i
+    age = Integer(gets.chomp)
+    raise 'Age should be positive.' if age <= 0
 
     print 'Name: '
-    name = gets.chomp
+    name = gets.chomp.strip
+    raise 'Name cannot be empty.' if name.empty?
 
     print 'Specialization: '
-    specialization = gets.chomp
+    specialization = gets.chomp.strip
+    raise 'Specialization cannot be empty.' if specialization.empty?
 
     teacher = Teacher.new(age, specialization, name)
     @people << teacher
     puts 'Teacher created successfully!'
+  rescue StandardError => e
+    puts "Error: #{e.message}"
+    retry
   end
 
   def create_book
     print 'Title: '
     title = gets.chomp
+    raise 'Title cannot be empty.' if title.empty?
 
     print 'Author: '
     author = gets.chomp
+    raise 'Author cannot be empty.' if author.empty?
 
     book = Book.new(title, author)
     @books << book
     puts 'Book created successfully!'
+  rescue StandardError => e
+    puts "Error: #{e.message}"
+    retry
   end
 
   def create_rental
