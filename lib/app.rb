@@ -42,27 +42,25 @@ class App
   end
 
   def create_student
-    begin
-      print 'Age: '
-      age = Integer(gets.chomp)
-      raise 'Age should be positive.' if age <= 0
+    print 'Age: '
+    age = Integer(gets.chomp)
+    raise 'Age should be positive.' if age <= 0
 
-      print 'Name: '
-      name = gets.chomp.strip
-      raise 'Name cannot be empty.' if name.empty?
+    print 'Name: '
+    name = gets.chomp.strip
+    raise 'Name cannot be empty.' if name.empty?
 
-      print 'Has parent permission? [Y/N]: '
-      raise 'Invalid input. Choose Y or N.' unless ['y', 'n'].include?(parent_permission_input)
+    print 'Has parent permission? [Y/N]: '
+    raise 'Invalid input. Choose Y or N.' unless %w[y n].include?(parent_permission_input)
 
-      parent_permission = parent_permission_input == 'y'
+    parent_permission = parent_permission_input == 'y'
 
-      student = Student.new(age, name, parent_permission: parent_permission)
-      @people << student
-      puts 'Student created successfully!'
-    rescue => exception
-      puts "Error: #{e.message}"
-      retry
-    end
+    student = Student.new(age, name, parent_permission: parent_permission)
+    @people << student
+    puts 'Student created successfully!'
+  rescue StandardError
+    puts "Error: #{e.message}"
+    retry
   end
 
   def create_teacher
