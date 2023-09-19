@@ -42,8 +42,7 @@ class App
   end
 
   def create_student
-    begin     
-      
+    begin
       print 'Age: '
       age = Integer(gets.chomp)
       raise 'Age should be positive.' if age <= 0
@@ -54,12 +53,12 @@ class App
 
       print 'Has parent permission? [Y/N]: '
       raise 'Invalid input. Choose Y or N.' unless ['y', 'n'].include?(parent_permission_input)
+
       parent_permission = parent_permission_input == 'y'
 
       student = Student.new(age, name, parent_permission: parent_permission)
       @people << student
       puts 'Student created successfully!'
-
     rescue => exception
       puts "Error: #{e.message}"
       retry
