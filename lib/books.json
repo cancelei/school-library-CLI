@@ -1,1 +1,0 @@
-[{"class":"Book","title":"Book1","author":"Author2","rentals":[]},{"class":"Book","title":"Author2","author":"TrueAuthor2","rentals":["#<Rental:0x0000012868db8440>"]}]

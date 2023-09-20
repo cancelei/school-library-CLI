@@ -6,9 +6,9 @@ require_relative 'teacher'
 require 'json'
 class App
   def initialize
-    @books = read_data("books.json")
-    @people = read_data("people.json")
-    @rentals = read_data("rentals.json")
+    @books = read_data('books.json')
+    @people = read_data('people.json')
+    @rentals = read_data('rentals.json')
   end
 
   def list_all_books
@@ -120,10 +120,10 @@ class App
   end
 
   def object_to_hash(object)
-    hash ={}
+    hash = {}
     hash['class'] = object.class # store the class_name
     object.instance_variables.each do |var|
-      name = var.to_s.delete("@") # take the name of variable without @
+      name = var.to_s.delete('@') # take the name of variable without @
       value = object.instance_variable_get(var)
       hash[name] = value
     end
@@ -131,11 +131,11 @@ class App
   end
 
   def write_data
-    data = {"books":@books,  "people":@people, "rentals":@rentals}
+    data = { books: @books, people: @people, rentals: @rentals }
     data.each do |key, arr|
-      arr = arr.select {|obj| !obj.nil? || arr.empty?} # take it if it's not empty or nil arrays
-      arr = arr.map {|obj| object_to_hash(obj)} # Convert each object to a hash
-      file_name = key.to_s + '.json' # the name of our futur json file
+      arr = arr.select { |obj| !obj.nil? || arr.empty? } # take it if it's not empty or nil arrays
+      arr = arr.map { |obj| object_to_hash(obj) } # Convert each object to a hash
+      file_name = "#{key}.json" # the name of our futur json file
       json = JSON.generate(arr) # Generate a JSON string fron the arr of hashes
       File.open(file_name, 'w') do |f|
         f.puts(json)
@@ -143,8 +143,8 @@ class App
       puts "The array #{key} has been written to #{file_name}"
     end
   end
-  
-  
+
+
 
   require 'json'
 
@@ -152,7 +152,7 @@ class App
     if File.exist?(file_name)
       json = File.read(file_name)
       arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes
-       
+
       arr = []
       arr_of_hashes.each do |hash|
         real_class = Kernel.const_get(hash['class']) # allows to get the class by it's name
@@ -166,15 +166,10 @@ class App
     end
   end
 
-  
-
-
   def check
     puts File.exist?('books.json') # should return true
     puts File.exist?('people.json') # should return true
     puts File.exist?('rentals.json') # should return true
     puts File.exist?('nonexistent.json')
   end
-  
 end
-

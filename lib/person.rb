@@ -7,9 +7,9 @@ class Person < Nameable
   attr_accessor :name, :age, :books, :rentals
   attr_reader :id
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
-    super(name)
-    @id = Random.rand(1..1000)
+  def initialize(age, name = 'Unknown', id = nil, parent_permission: true)
+    super(name) # Use parentheses
+    @id = id.nil? ? Random.rand(1..1000) : id # Use ternary operator
     @age = age
     @name = name
     @parent_permission = parent_permission

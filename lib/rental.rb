@@ -12,10 +12,11 @@ class Rental
   end
 
   def self.json_create(hash)
-    date = hash.fetch("date") # get the values from the hash by their keys
-    person = hash.fetch("person")
-    book = hash.fetch("book")
-    rental=new(date, person, book)
-    rental
+    date = hash.fetch('date') # get the values from the hash by their keys
+    person = hash.fetch('person')
+    book = hash.fetch('book')
+    obj_person = Teacher.new(person['age'], person['name'], person['id'], person['specialization'])
+    obj_book = Book.new(book['title'], book['author'])
+    new(date, obj_person, obj_book)
   end
 end

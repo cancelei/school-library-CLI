@@ -15,12 +15,12 @@ class Book
     # *the book itself should be sent as a parameter to create the new rental achieving the 'has-many' association.
     Rental.new(date, self, person)
   end
-  
+
   def self.json_create(hash)
-    title = hash.fetch("title") # get the values from the hash by their keys
-    author = hash.fetch("author")
-    rentals = hash.fetch("rentals")
-    book=new(title, author)
+    title = hash.fetch('title') # get the values from the hash by their keys
+    author = hash.fetch('author')
+    rentals = hash.fetch('rentals')
+    book = new(title, author)
     book.rentals = rentals
     # Return the book object
     book
