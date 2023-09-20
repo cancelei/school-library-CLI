@@ -23,7 +23,7 @@ class App
     if @people.empty?
       puts 'No people added.'
     else
-      @people.each { |person| puts "ID: #{person.id}, Name: #{@people}" }
+      @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}" }
     end
   end
 
@@ -121,6 +121,7 @@ class App
 
   def object_to_hash(object)
     hash ={}
+    hash['class'] = object.class # store the class_name
     object.instance_variables.each do |var|
       name = var.to_s.delete("@") # take the name of variable without @
       value = object.instance_variable_get(var)
@@ -130,44 +131,41 @@ class App
   end
 
   def write_data
-    data = {"books":@books, "rentals":@rentals, "people":@people}
+    data = {"books":@books,  "people":@people, "rentals":@rentals}
     data.each do |key, arr|
-      unless arr.empty? || arr.nil?
-        name = key.to_s
-        file_name = name + '.json'
-        json = JSON.generate(arr)
-        File.open(file_name, 'w') do |f|
-          arr.each do |elt|
-            temp = object_to_hash(elt)
-            f.puts(JSON.generate(temp))
-          end
-        end
-        puts "The array #{name} has been written to #{file_name}"
-      else 
-        puts "#{key.to_s} is empty or nil"
-      end 
+      arr = arr.select {|obj| !obj.nil? || arr.empty?} # take it if it's not empty or nil arrays
+      arr = arr.map {|obj| object_to_hash(obj)} # Convert each object to a hash
+      file_name = key.to_s + '.json' # the name of our futur json file
+      json = JSON.generate(arr) # Generate a JSON string fron the arr of hashes
+      File.open(file_name, 'w') do |f|
+        f.puts(json)
+      end
+      puts "The array #{key} has been written to #{file_name}"
     end
   end
+  
   
 
   require 'json'
 
   def read_data(file_name)
     if File.exist?(file_name)
-      File.open(file_name, 'r') do |file|
-        arr = []
-        file.each_line do |line|
-          line.chomp!
-          obeject = Object.const_get(line[/[A-Z]\w*/]).json_create(line)
-          arr.push(object_id)
-        end
-        arr
+      json = File.read(file_name)
+      arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes
+       
+      arr = []
+      arr_of_hashes.each do |hash|
+        real_class = Kernel.const_get(hash['class']) # allows to get the class by it's name
+        object = real_class.json_create(hash) # create methode from the hash
+        arr.push(object)
       end
+      arr
     else
       puts "The file #{file_name} does not exist."
-      [] # return en empty array
+      [] # return an empty array
     end
   end
+
   
 
 

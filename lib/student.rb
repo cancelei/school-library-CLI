@@ -14,4 +14,17 @@ class Student < Person
   def play_hooky
     '¯(ツ)/¯'
   end
+
+  def self.json_create(hash)
+    name = hash.fetch("name", "Unknown") # get the values from the hash by their keys
+    id = hash.fetch("id", 0)
+    age = hash.fetch("age", 0)
+    parent_permission = hash.fetch("parent_permission", true)
+    books = hash.fetch("books")
+    rentals = hash.fetch("rentals")
+    student = new(age, name = name, parent_permission: parent_permission)
+    student.books = books
+    student.rentals = rentals
+    student
+  end
 end

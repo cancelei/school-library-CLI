@@ -12,11 +12,18 @@ class Teacher < Person
     true
   end
 
-  def self.json_create(string)
-    # Use a regular expression to extract the attributes and values from the string
-    /<Teacher:(\d+) name:(.*), age:(\d+), specialization:(.*)>/ =~ string
-
-    # Create a new instance of the class with the extracted values
-    new($2, $3.to_i, $4)
+  def self.json_create(hash)
+    name = hash.fetch("name", "Unknown") # get the values from the hash by their keys
+    id = hash.fetch("id", 0)
+    age = hash.fetch("age", 0)
+    specialization = hash.fetch("specialization", "None")
+    # Create a new instance of the class
+    teacher = new(age, name = name, specialization)
+    books = hash.fetch("books")
+    rentals = hash.fetch("rentals")
+    teacher.books = books
+    teacher.rentals = rentals
+    teacher
   end
+
 end

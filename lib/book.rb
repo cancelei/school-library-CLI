@@ -16,19 +16,12 @@ class Book
     Rental.new(date, self, person)
   end
   
-  def self.json_create(string)
-    # Use a regular expression to extract the attributes and values from the string
-    /<Book:(\d+) title:(.*), author:(.*), rentals:(.*)>/ =~ string
-
-    # Create a new instance of the class with the extracted values
-    book = new($2, $3)
-
-    # Parse the rentals array from the string and create rental objects
-    rentals = JSON.parse($4)
-    rentals.each do |rental|
-      book.add_rental(Person.json_create(rental["person"]), rental["date"])
-    end
-
+  def self.json_create(hash)
+    title = hash.fetch("title") # get the values from the hash by their keys
+    author = hash.fetch("author")
+    rentals = hash.fetch("rentals")
+    book=new(title, author)
+    book.rentals = rentals
     # Return the book object
     book
   end
