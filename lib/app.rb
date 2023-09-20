@@ -121,14 +121,20 @@ class App
 
   def object_to_hash(object)
     hash = {}
+    arr_of_class = ['Teacher', 'Student', 'Book', 'Rental']
     hash['class'] = object.class # store the class_name
     object.instance_variables.each do |var|
       name = var.to_s.delete('@') # take the name of variable without @
       value = object.instance_variable_get(var)
+      # Check if value is an array of objects
+      if arr_of_class.include?(value.class.to_s)
+        value = value == object ? value : object_to_hash(value)
+      end
       hash[name] = value
     end
     hash
   end
+  
 
   def write_data
     data = { books: @books, people: @people, rentals: @rentals }

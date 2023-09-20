@@ -23,6 +23,7 @@ class Teacher < Person
     rentals = hash.fetch('rentals')
     teacher.books = books
     teacher.rentals = rentals
+    # puts rentals.to_s
     teacher
   end
 end

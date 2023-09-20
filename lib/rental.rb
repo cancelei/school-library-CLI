@@ -17,6 +17,10 @@ class Rental
     book = hash.fetch('book')
     obj_person = Teacher.new(person['age'], person['name'], person['id'], person['specialization'])
     obj_book = Book.new(book['title'], book['author'])
-    new(date, obj_person, obj_book)
+    #puts obj_person.to_s
+    puts person
+    #puts book.to_s
+    rental = new(date, obj_person, obj_book)
+    rental
   end
 end
