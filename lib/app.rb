@@ -4,6 +4,7 @@ require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
 require 'json'
+require 'fileutils'
 class App
   def initialize
     @books = read_data('books.json')
@@ -109,7 +110,8 @@ class App
     puts 'Rental created successfully!'
   end
 
-  def list_rentals_for_person(person_id)
+  def list_rentals_for_person
+    retrieve_id
     rentals = @rentals.select { |rental| rental.person.id == person_id }
 
     if rentals.empty?
@@ -162,19 +164,20 @@ class App
         end
         arr
       else
-        puts "The file #{file_name} does not exist."
         [] # return an empty array if the file doesn't exist
       end
     else
-      puts "The folder 'json' does not exist."
       [] # return an empty array if the folder doesn't exist
     end
   end
 
-  def check
-    puts File.exist?('books.json') # should return true
-    puts File.exist?('people.json') # should return true
-    puts File.exist?('rentals.json') # should return true
-    puts File.exist?('nonexistent.json')
+  def exit_app
+    write_data
+    abort('Goobye !')
+  end
+
+  def retrieve_id
+    print 'Enter the person ID: '
+    gets.chomp.to_i
   end
 end
