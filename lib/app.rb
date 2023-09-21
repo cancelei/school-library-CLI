@@ -140,7 +140,7 @@ class App
       arr = arr.map { |obj| object_to_hash(obj) } # Convert each object to a hash
       file_name = "#{key}.json" # the name of our futur json file
       json = JSON.generate(arr) # Generate a JSON string fron the arr of hashes
-      Dir.mkdir("json") unless Dir.exist?("json") # create a json file if it's not exist
+      FileUtils.mkdir_p('json') # create a json file if it's not exist
       File.open("json/#{file_name}", 'w') do |f|
         f.puts(json)
       end
@@ -149,7 +149,7 @@ class App
   end
 
   def read_data(file_name)
-    if Dir.exist?("json")
+    if Dir.exist?('json')
       if File.exist?("json/#{file_name}")
         json = File.read("json/#{file_name}")
         arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes

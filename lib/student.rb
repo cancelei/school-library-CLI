@@ -3,7 +3,7 @@ require_relative 'classroom'
 
 class Student < Person
   def initialize(age, name = 'Unknown', id = nil, parent_permission: true)
-    super(age, name = name, id = id, parent_permission: parent_permission)
+    super(age, name, id, parent_permission: parent_permission)
   end
 
   def classroom=(classroom)
@@ -22,7 +22,7 @@ class Student < Person
     parent_permission = hash.fetch('parent_permission', true)
     books = hash.fetch('books')
     rentals = hash.fetch('rentals')
-    student = new(age, name = name, id = id, parent_permission: parent_permission)
+    student = new(age, name, id, parent_permission: parent_permission)
     student.books = books
     student.rentals = rentals
     student

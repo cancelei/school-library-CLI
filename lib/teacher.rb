@@ -18,7 +18,7 @@ class Teacher < Person
     age = hash.fetch('age', 0)
     specialization = hash.fetch('specialization', 'None')
     # Create a new instance of the class
-    teacher = new(age, specialization, name = name, id = id)
+    teacher = new(age, specialization, name, id)
     books = hash.fetch('books')
     rentals = hash.fetch('rentals')
     teacher.books = books
