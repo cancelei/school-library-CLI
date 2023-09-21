@@ -140,7 +140,8 @@ class App
       arr = arr.map { |obj| object_to_hash(obj) } # Convert each object to a hash
       file_name = "#{key}.json" # the name of our futur json file
       json = JSON.generate(arr) # Generate a JSON string fron the arr of hashes
-      File.open(file_name, 'w') do |f|
+      Dir.mkdir("json") unless Dir.exist?("json") # create a json file if it's not exist
+      File.open("json/#{file_name}", 'w') do |f|
         f.puts(json)
       end
       puts "The array #{key} has been written to #{file_name}"
@@ -148,20 +149,25 @@ class App
   end
 
   def read_data(file_name)
-    if File.exist?(file_name)
-      json = File.read(file_name)
-      arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes
+    if Dir.exist?("json")
+      if File.exist?("json/#{file_name}")
+        json = File.read("json/#{file_name}")
+        arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes
 
-      arr = []
-      arr_of_hashes.each do |hash|
-        real_class = Kernel.const_get(hash['class']) # allows to get the class by it's name
-        object = real_class.json_create(hash) # create methode from the hash
-        arr.push(object)
+        arr = []
+        arr_of_hashes.each do |hash|
+          real_class = Kernel.const_get(hash['class']) # allows to get the class by it's name
+          object = real_class.json_create(hash) # create methode from the hash
+          arr.push(object)
+        end
+        arr
+      else
+        puts "The file #{file_name} does not exist."
+        [] # return an empty array if the file doesn't exist
       end
-      arr
     else
-      puts "The file #{file_name} does not exist."
-      [] # return an empty array
+      puts "The folder 'json' does not exist."
+      [] # return an empty array if the folder doesn't exist
     end
   end
 
