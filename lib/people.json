@@ -1,1 +1,1 @@
-[{"class":"Teacher","name":"math","id":509,"age":45,"parent_permission":true,"books":[],"rentals":["#<Rental:0x0000016a37917e20>"],"specialization":"Joseph"}]
+[{"class":"Teacher","name":"Math","id":93,"age":34,"parent_permission":true,"books":[],"rentals":["#<Rental:0x000001ef0f2e7b10>","#<Rental:0x0000022367c33e30>"],"specialization":"Joseph"}]

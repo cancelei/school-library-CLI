@@ -4,7 +4,6 @@ def main
   app = App.new
 
   loop do
-    app.check
     puts '\nPlease choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all people'
