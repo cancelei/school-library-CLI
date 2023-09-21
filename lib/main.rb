@@ -27,8 +27,8 @@ def main
       app.create_rental
     when '6'
       print 'Enter the person ID: '
-      id = gets.chomp.to_i
-      app.list_rentals_for_person(id)
+      person_id = gets.chomp.to_i
+      app.list_rentals_for_person(person_id)
     when '7'
       app.write_data
       puts 'Goodbye!'
@@ -36,7 +36,10 @@ def main
     else
       puts 'Invalid option. Please, try again.'
     end
+
+    # Add an empty line before the end of the loop
   end
 end
 
+# Add an empty line before calling the main method
 main
