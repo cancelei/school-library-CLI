@@ -29,7 +29,10 @@ def main
     else
       puts 'Invalid option. Please, try again.'
     end
+
+    # Add an empty line before the end of the loop
   end
 end
 
+# Add an empty line before calling the main method
 main
