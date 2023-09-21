@@ -3,18 +3,18 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 \[School Library CLI\] ](#about-project)
-  - [🛠 Built With ](#built-with)
-    - [Tech Stack ](#tech-stack)
+- [📖 \[School Library CLI\] ](#-school-library-cli-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
-  - [👥 Authors ](#authors)
-  - [🔭 Future Features ](#-future-features-)
+    - [Useage](#useage)
+  - [👥 Authors ](#-authors-)
   - [🤝 Contributing ](#-contributing-)
   - [⭐️ Show your support ](#️-show-your-support-)
-  - [🙏 Acknowledgments ](#acknowledgments)
-  - [📝 License ](#license)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
 <!-- PROJECT DESCRIPTION -->
 
@@ -100,6 +100,12 @@ Run the following command inside the project folder:
 
 - GitHub: [@cancelei](https://github.com/cancelei)
 - LinkedIn: [Glauber Bannwart](https://www.linkedin.com/in/gbannwart/)
+
+👤 **Joseph L Kausi**
+
+- GitHub: [@Grandi0z](https://github.com/Grandi0z)
+- Twitter: [@Joseph_LSK](https://twitter.com/Joseph_LSK)
+- LinkedIn: [Joseph L Kausi](https://www.linkedin.com/in/joskal/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

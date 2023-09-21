@@ -3,8 +3,14 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'modules/mod_people'
+require_relative 'modules/mod_books'
+require_relative 'modules/mod_rentals'
 
 class App
+  include PeopleMod
+  include BooksMod
+  include RentalsMod
   def initialize
     @books = []
     @people = []
@@ -28,76 +34,44 @@ class App
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    choice = gets.chomp
-
-    case choice
-    when '1'
-      create_student
-    when '2'
-      create_teacher
+    type = take_type
+    age = take_age
+    name = take_name
+    if type == 1
+      parent_permission = take_parent_permission
+      create_student(age, name, parent_permission)
     else
-      puts 'Invalid option.'
+      specialization = take_specialization
+      create_teacher(age, specialization, name)
     end
   end
 
-  def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp.downcase == 'y'
-
+  def create_student(age, name, parent_permission)
     student = Student.new(age, name, parent_permission: parent_permission)
     @people << student
     puts 'Student created successfully!'
   end
 
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-
-    print 'Name: '
-    name = gets.chomp
-
-    print 'Specialization: '
-    specialization = gets.chomp
-
+  def create_teacher(age, specialization, name)
     teacher = Teacher.new(age, specialization, name)
     @people << teacher
     puts 'Teacher created successfully!'
   end
 
   def create_book
-    print 'Title: '
-    title = gets.chomp
-
-    print 'Author: '
-    author = gets.chomp
-
+    title = take_title
+    author = take_author
     book = Book.new(title, author)
     @books << book
     puts 'Book created successfully!'
   end
 
   def create_rental
-    puts 'Select a book from the following list by number:'
-    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
-    book_index = gets.chomp.to_i
+    book = select_book
+    person = select_person
+    date = take_date
 
-    puts 'Select a person from the following list by number:'
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}"
-    end
-    person_index = gets.chomp.to_i
-
-    print 'Date: '
-    date = gets.chomp
-
-    rental = Rental.new(date, @people[person_index], @books[book_index])
+    rental = Rental.new(date, person, book)
     @rentals << rental
     puts 'Rental created successfully!'
   end
