@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../lib/book.rb'
-require_relative '../lib/rental.rb'
+require_relative '../lib/book'
+require_relative '../lib/rental'
 
 describe Book do
   let(:book) { Book.new('The Great Gatsby', 'F. Scott Fitzgerald') }
