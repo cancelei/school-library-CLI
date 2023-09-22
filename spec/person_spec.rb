@@ -2,7 +2,6 @@ require 'rspec'
 require_relative '../lib/person'
 require_relative '../lib/rental'
 
-
 describe Person do
   let(:person) { Person.new(25, 'Alice', 123) }
   let(:book) { Book.new('The Catcher in the Rye', 'J.D. Salinger') }
@@ -73,4 +72,3 @@ describe Person do
     end
   end
 end
-
