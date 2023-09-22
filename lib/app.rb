@@ -3,6 +3,9 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'modules/mod_books'
+require_relative 'modules/mod_people'
+require_relative 'modules/mod_rentals'
 
 require 'json'
 require 'fileutils'
@@ -76,11 +79,11 @@ class App
   end
 
   def list_rentals_for_person
-    retrieve_id
-    rentals = @rentals.select { |rental| rental.person.id == person_id }
+    id = retrieve_id
+    rentals = @rentals.select { |rental| rental.person.id == id }
 
     if rentals.empty?
-      puts "No rentals found for person with ID #{person_id}."
+      puts "No rentals found for person with ID #{id}."
     else
       rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title}" }
     end
