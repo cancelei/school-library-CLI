@@ -3,18 +3,20 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
-require_relative 'modules/mod_people'
 require_relative 'modules/mod_books'
+require_relative 'modules/mod_people'
 require_relative 'modules/mod_rentals'
 
+require 'json'
+require 'fileutils'
 class App
   include PeopleMod
   include BooksMod
   include RentalsMod
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = read_data('books.json')
+    @people = read_data('people.json')
+    @rentals = read_data('rentals.json')
   end
 
   def list_all_books
@@ -76,13 +78,74 @@ class App
     puts 'Rental created successfully!'
   end
 
-  def list_rentals_for_person(person_id)
-    rentals = @rentals.select { |rental| rental.person.id == person_id }
+  def list_rentals_for_person
+    id = retrieve_id
+    rentals = @rentals.select { |rental| rental.person.id == id }
 
     if rentals.empty?
-      puts "No rentals found for person with ID #{person_id}."
+      puts "No rentals found for person with ID #{id}."
     else
       rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title}" }
     end
+  end
+
+  def object_to_hash(object)
+    hash = {}
+    arr_of_class = %w[Teacher Student Book Rental]
+    hash['class'] = object.class # store the class_name
+    object.instance_variables.each do |var|
+      name = var.to_s.delete('@') # take the name of variable without @
+      value = object.instance_variable_get(var)
+      # Check if value is an array of objects
+      value = object_to_hash(value) if arr_of_class.include?(value.class.to_s)
+      hash[name] = value
+    end
+    hash
+  end
+
+  def write_data
+    data = { books: @books, people: @people, rentals: @rentals }
+    data.each do |key, arr|
+      arr = arr.select { |obj| !obj.nil? || arr.empty? } # take it if it's not empty or nil arrays
+      arr = arr.map { |obj| object_to_hash(obj) } # Convert each object to a hash
+      file_name = "#{key}.json" # the name of our futur json file
+      json = JSON.generate(arr) # Generate a JSON string fron the arr of hashes
+      FileUtils.mkdir_p('json') # create a json file if it's not exist
+      File.open("json/#{file_name}", 'w') do |f|
+        f.puts(json)
+      end
+      puts "The array #{key} has been written to #{file_name}"
+    end
+  end
+
+  def read_data(file_name)
+    if Dir.exist?('json')
+      if File.exist?("json/#{file_name}")
+        json = File.read("json/#{file_name}")
+        arr_of_hashes = JSON.parse(json) # Convert JSON string into an array of hashes
+
+        arr = []
+        arr_of_hashes.each do |hash|
+          real_class = Kernel.const_get(hash['class']) # allows to get the class by it's name
+          object = real_class.json_create(hash) # create methode from the hash
+          arr.push(object)
+        end
+        arr
+      else
+        [] # return an empty array if the file doesn't exist
+      end
+    else
+      [] # return an empty array if the folder doesn't exist
+    end
+  end
+
+  def exit_app
+    write_data
+    abort('Goobye !')
+  end
+
+  def retrieve_id
+    print 'Enter the person ID: '
+    gets.chomp.to_i
   end
 end
