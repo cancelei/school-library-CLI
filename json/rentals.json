@@ -1,0 +1,1 @@
+[{"class":"Rental","date":"22/10/2023","person":{"class":"Student","name":"dasd","id":816,"age":22,"parent_permission":"y","books":[],"rentals":["#<Rental:0x00007f3fd9d4bed8>"]},"book":{"class":"Book","title":"asd","author":"eee","rentals":["#<Rental:0x00007f3fd9d4bed8>"]}}]
